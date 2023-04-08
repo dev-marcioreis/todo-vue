@@ -1,6 +1,7 @@
 # Vue 3 + Vite
 
 Inciando novo projeto...<br>
+Projeto em processo de criação.<br>
 Este projeto será um Todo List.<br>
 Link de acesso: https://dev-marcioreis.github.io/todo-vue/
 
