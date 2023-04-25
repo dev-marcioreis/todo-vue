@@ -8,12 +8,32 @@ const input_content = ref('')
 const input_category = ref(null)
 
 const todos_asc = computed(() => todos.value.sort((a, b) => {
-    return a.createdAt - b.createdAt
+    return b.createdAt - a.createdAt
 }))
 
 const addTodo = () => {
+    if(input_content.value.trim() === '' || input_category.value === null) {
+        return
+    } 
 
+    todos.value.push({
+        content: input_content.value,
+        category: input_category.value,
+        done: false,
+        createdAt: new Date().getTime()
+    })
+
+    input_content.value = ''
+    input_category.value = null
 }
+
+const removeTodo = todo => {
+    todos.value = todos.value.filter(t => t !== todo)
+}
+
+watch(todos, newVal => {
+    localStorage.setItem('todos', JSON.stringify(newVal))
+}, { deep: true})
 
 watch(name, newVal => {
     localStorage.setItem('name', newVal)
@@ -21,6 +41,7 @@ watch(name, newVal => {
 
 onMounted(() => {
     name.value = localStorage.getItem('name') || ''
+    todos.value = JSON.parse(localStorage.getItem('todos')) || []
 })
 
 </script>
@@ -31,24 +52,44 @@ onMounted(() => {
             <h2 class="title">E aí, <input type="text" placeholder="seu nome..." v-model="name" /></h2>
         </section>
         <section class="create-todo">
-            <h3>Criar afazeres</h3>
+            <h4>CRIAR TAREFA</h4>
             <form @submit.prevent="addTodo">
-                <h4>Qual sua lista de tarefas?</h4>
-                <input type="text" placeholder="Digite o nome..." v-model="input_content" />
-                <h4>Escolha</h4>
+                <h4>Qual a próxima tarefas?</h4>
+                <input type="text" placeholder="Nome..." v-model="input_content" />
+                <h4>Opções</h4>
                 <div class="options">
                     <label>
-                        <input type="radio" name="category" value="negócios" v-model="input_category" />
+                        <input type="radio" name="category" value="business" v-model="input_category" />
                         <span class="bubble business"></span>
                         <div>Negócios</div>
                     </label>
                     <label>
-                        <input type="radio" name="category" value="pessoal" v-model="input_category" />
+                        <input type="radio" name="category" value="personal" v-model="input_category" />
                         <span class="bubble personal"></span>
                         <div>Pessoal</div>
                     </label>
                 </div>
+                <input type="submit" value="Adicionar" />
             </form>
+        </section>
+        <section class="todo-list">
+            <h4>Lista de tarefas</h4>
+            <div class="list">
+                <div v-for="todo in todos_asc" :class="`todo-item ${todo.done && 'done'}`">
+                    <label>
+                        <input type="checkbox" v-model="todo.done" />
+                        <span :class="`bubble ${todo.category}`"></span>
+                    </label>
+                    <div class="todo-content">
+                        <input type="text" v-model="todo.content" />
+                    </div>
+                    <div class="actions">
+                        <button class="delete" @click="removeTodo(todo)">
+                            Apagar
+                        </button>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 </template>
