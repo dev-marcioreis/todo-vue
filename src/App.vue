@@ -3,8 +3,8 @@
 </script>
 
 <template>
- <div>
-  oi
- </div>
+    <div>
+        Começando projeto...
+    </div>
 </template>
 
