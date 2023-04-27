@@ -147,7 +147,7 @@ input:checked ~ .bubble::after {
 	align-items: center;
 }
 .todo-item .actions button {
-	display: block;
+	position: relative;
 	padding: .3rem;
 	color: hsl(0, 0%, 100%);
 	border-radius: .5rem;
