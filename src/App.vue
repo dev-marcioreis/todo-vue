@@ -52,7 +52,6 @@ onMounted(() => {
             <h2 class="title">E aí, <input type="text" placeholder="seu nome..." v-model="name" /></h2>
         </section>
         <section class="create-todo">
-            <h4>CRIAR TAREFA</h4>
             <form @submit.prevent="addTodo">
                 <h4>Qual a próxima tarefas?</h4>
                 <input type="text" placeholder="Nome..." v-model="input_content" />
