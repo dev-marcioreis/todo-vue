@@ -2,7 +2,7 @@
 
 ---
 
-Este projeto é um Todo List, o objetivo é aprendizado.<br>
+O objetivo deste projeto é aprendizado.<br>
 Só terá versão para celular.
 
 ## 🚀 Finalizado.
