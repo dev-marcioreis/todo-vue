@@ -5,7 +5,7 @@
 O objetivo deste projeto é aprendizado.<br>
 Só terá versão para celular.
 
-## 🚀 Finalizado.
+## 🚀 Finalizado!
 
 ## 📋 Tecnologias
 VueJS + LocalStorage
